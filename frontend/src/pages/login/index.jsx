@@ -66,7 +66,7 @@ export default function Login() {
                         background: authState.isError ? "#fef2f2" : "#ecfdf5",
                         display: authState.message ? "inline-block" : "none"
                     }}>
-                        {authState.message?.message || authState.message}
+                        {typeof authState.message === 'string' ? authState.message : (authState.message?.message || "An unexpected error occurred")}
                     </div>
                     
                     <div className={styles.inputContainer}>

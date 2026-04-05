@@ -64,12 +64,13 @@ export default function ViewProfile({ userProfile }) {
 
   useEffect(() => 
     {
-            let post =postReducer.posts;
-            if(userProfile?.userId?._id) {
-               let userposts = post.filter((post) => post.userId._id === userProfile.userId._id);
+            let post = postReducer.posts;
+            if(userProfile?.userId?._id && Array.isArray(post)) {
+               let userposts = post.filter((post) => post.userId?._id === userProfile.userId._id);
                setuserposts(userposts);
             }
   },[postReducer.posts, userProfile]);
+
   
   useEffect(() => {
     dispatch(getAboutUser({ token: localStorage.getItem('token') }));
