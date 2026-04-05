@@ -5,6 +5,12 @@
   animation: fadeIn 0.4s ease forwards;
 }
 
+@media (max-width: 640px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+}
+
 .header {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
@@ -19,6 +25,12 @@
   letter-spacing: -1px;
 }
 
+@media (max-width: 640px) {
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
 .subtitle {
   font-size: 1.1rem;
   color: var(--text-secondary);
@@ -28,9 +40,10 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap: 2rem;
 }
+
 
 .card {
   background: var(--card-bg);

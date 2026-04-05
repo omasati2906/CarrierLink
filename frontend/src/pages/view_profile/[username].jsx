@@ -89,7 +89,7 @@ export default function ViewProfile({ userProfile }) {
         if(userProfile?.userId?._id)
         {
             let connections = authState.connections || [];
-            let connectionRequests = authState.ConnectionRequests || [];
+            let connectionRequests = authState.connectionRequests || [];
            
             if(connections.some((conn)=>conn.connectionId?._id===userProfile.userId._id) ||
                connectionRequests.some((conn)=>conn.userId?._id===userProfile.userId._id))
@@ -106,6 +106,7 @@ export default function ViewProfile({ userProfile }) {
             }
         }
     },[authState.connections, authState.connectionRequests, userProfile]);
+
 
   if (!userProfile) {
     return (

@@ -1,7 +1,7 @@
 import UserLayout from '@/layout/UserLayout'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getwhoSentmeconnectionRequest, getmyconnectionRequest, acceptConnectionsRequest } from '@/config/redux/action/authAction';
+import { getwhoSentmeconnectionRequest, getmyconnectionRequest, acceptConnectionsRequest, getAboutUser } from '@/config/redux/action/authAction';
 import { useEffect } from 'react';
 import styles from "./styles.module.css";
 import { getImageUrl, DEFAULT_AVATAR } from '@/config';
@@ -55,6 +55,7 @@ export default function MyConnections() {
                 {authState.connectionRequests && authState.connectionRequests.length > 0 ? (
                     authState.connectionRequests.filter((connectionRequest) => connectionRequest.status_accepted !== true).map((connectionRequest) => {
                         const user = connectionRequest.userId;
+                        if (!user) return null; // Defensive check
                         return (
                             <div key={connectionRequest._id} className={styles.card} onClick={() => router.push(`/view_profile/${user?.username}`)}>
                                 <div className={styles.cardHeader}>
