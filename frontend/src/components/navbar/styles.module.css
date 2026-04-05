@@ -1,0 +1,249 @@
+.container {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.75rem 2rem;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    transition: all 0.3s ease;
+}
+
+.navBar {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.leftSection {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+}
+
+.logoIcon {
+    width: 38px;
+    height: 38px;
+    background: var(--gradient-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 1.3rem;
+    box-shadow: var(--shadow-indigo);
+}
+
+.logoText {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navLinks {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.navLink, .activeLink {
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navLink:hover {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.05);
+    cursor: pointer;
+}
+
+.activeLink {
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.08);
+    cursor: pointer;
+}
+
+.navIcon {
+    font-size: 1.25rem;
+}
+
+.searchBar {
+    flex: 0 1 350px;
+    position: relative;
+    margin: 0 2rem;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 2.8rem;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1.5px solid transparent;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    background: white;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.profileSection {
+    position: relative;
+}
+
+.profileWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    background: var(--border-light);
+    border: 1px solid var(--border-medium);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.profileWrapper:hover {
+    background: white;
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.profileImage {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: var(--shadow-sm);
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.userName {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 220px;
+    background: white;
+    border-radius: 20px;
+    padding: 0.75rem;
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--border-light);
+    animation: fadeIn 0.2s ease;
+}
+
+.dropdownItem {
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.dropdownItem:hover {
+    background: var(--bg);
+    color: var(--primary);
+}
+
+.logout {
+    color: #ef4444;
+    margin-top: 0.4rem;
+    border-top: 1px solid var(--border-light);
+    border-radius: 0 0 12px 12px;
+}
+
+.logout:hover {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+.buttonJoin {
+    padding: 0.75rem 1.75rem;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: var(--shadow-indigo);
+    transition: all 0.3s ease;
+}
+
+.buttonJoin:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -5px rgba(99, 102, 241, 0.4);
+}
+
+@media (max-width: 900px) {
+    .container {
+        padding: 0.75rem 1rem;
+    }
+    .searchBar {
+        display: none;
+    }
+    .navLinks {
+        gap: 0.5rem;
+    }
+    .navLink, .activeLink {
+        padding: 0.5rem 0.75rem;
+    }
+    .logoText {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .userName {
+        display: none;
+    }
+    .profileWrapper {
+        padding: 0.4rem;
+        background: transparent;
+        border: none;
+    }
+    .navLinks {
+        gap: 0;
+    }
+}
+

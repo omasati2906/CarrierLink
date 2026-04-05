@@ -1,0 +1,213 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+    top: -200px;
+    right: -200px;
+    border-radius: 50%;
+}
+
+.cardContainer {
+    display: flex;
+    background: var(--card-bg);
+    border-radius: 32px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 640px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-light);
+    position: relative;
+    z-index: 10;
+}
+
+.cardContainer_left {
+    flex: 1.2;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.cardleft_heading {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+    letter-spacing: -2px;
+}
+
+.error_success_msg {
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.inputRow {
+    display: flex;
+    gap: 1rem;
+}
+
+.inputField {
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    border: 1.5px solid var(--border-medium);
+    outline: none;
+    font-size: 1rem;
+    font-weight: 500;
+    background: white;
+    transition: all 0.3s ease;
+    width: 100%;
+    color: var(--text-main);
+}
+
+.inputField::placeholder {
+    color: var(--text-muted);
+}
+
+.inputField:focus {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
+}
+
+.buttonWithOutline {
+    padding: 1.1rem;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    box-shadow: var(--shadow-indigo);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 1.5rem;
+}
+
+.buttonWithOutline:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px -5px rgba(99, 102, 241, 0.4);
+    filter: brightness(1.05);
+}
+
+.buttonWithOutline:active {
+    transform: translateY(0);
+}
+
+.cardContainer_right {
+    flex: 0.8;
+    background: var(--gradient-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cardContainer_right h2 {
+    font-weight: 700;
+    letter-spacing: -1px;
+    z-index: 2;
+}
+
+.cardContainer_right p {
+    font-weight: 500;
+    max-width: 280px;
+    line-height: 1.6;
+    z-index: 2;
+}
+
+.cardContainer_right::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 1;
+}
+
+.toggleText {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    display: block;
+}
+
+.toggleText:hover {
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+    .cardContainer {
+        min-height: auto;
+        flex-direction: column;
+        border-radius: 24px;
+        max-width: 500px;
+    }
+    .cardContainer_right {
+        padding: 3rem 2rem;
+        order: -1;
+    }
+    .cardContainer_left {
+        padding: 3rem 2rem;
+    }
+    .cardleft_heading {
+        font-size: 2.2rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+    .cardContainer_left {
+        padding: 2rem 1.5rem;
+    }
+    .cardContainer_right {
+        padding: 2.5rem 1.5rem;
+    }
+    .cardleft_heading {
+        font-size: 1.8rem;
+    }
+    .inputRow {
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+}
