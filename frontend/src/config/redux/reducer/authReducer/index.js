@@ -137,7 +137,7 @@ const authSlice = createSlice({
                  state.isSuccess = true;
                 state.isLoggedIn = true;
                 state.message = "Who sent you connection requests fetched successfully"
-                state.ConnectionRequests = [...action.payload].reverse();
+                state.connectionRequests = [...action.payload].reverse();
             })
             .addCase(getwhoSentmeconnectionRequest.rejected, (state, action) => {        
                 state.isLoading = false;

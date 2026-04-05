@@ -456,7 +456,26 @@ export const findConnections = async (req, res) => {
       if (!user) {
          return res.status(404).json({ message: "User not found" })
       }
-      const connections = await Connections.find({ $or: [{ userId: user._id, status_accepted: true }, { connectionId: user._id, status_accepted: true }] }).populate('connectionId', 'name username email profilePicture').populate('userId', 'name username email profilePicture');
+      
+      const rawConnections = await Connections.find({ 
+         $or: [
+            { userId: user._id, status_accepted: true }, 
+            { connectionId: user._id, status_accepted: true }
+         ] 
+      }).populate('connectionId', 'name username email profilePicture').populate('userId', 'name username email profilePicture');
+      
+      const connections = rawConnections.map(conn => {
+         if (conn.connectionId && conn.connectionId._id.toString() === user._id.toString()) {
+            // I am the connectionId, so the OTHER user is userId. We swap them.
+            return {
+               ...conn.toObject(),
+               connectionId: conn.userId,
+               userId: conn.connectionId
+            }
+         }
+         return conn;
+      });
+
       return res.status(200).json(connections.reverse())
    } catch (error) {
       return res.status(500).json({ message: error.message })

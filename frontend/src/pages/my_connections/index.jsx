@@ -52,11 +52,11 @@ export default function MyConnections() {
             </div>
             
             <div className={styles.grid}>
-                {authState.ConnectionRequests && authState.ConnectionRequests.length > 0 ? (
-                    authState.ConnectionRequests.filter((connectionRequest)=>connectionRequest.status_accepted!==true).map((connectionRequest)=>{
+                {authState.connectionRequests && authState.connectionRequests.length > 0 ? (
+                    authState.connectionRequests.filter((connectionRequest) => connectionRequest.status_accepted !== true).map((connectionRequest) => {
                         const user = connectionRequest.userId;
-                        return(
-                            <div key={connectionRequest._id} className={styles.card} onClick={()=>router.push(`/view_profile/${user.username}`)}>
+                        return (
+                            <div key={connectionRequest._id} className={styles.card} onClick={() => router.push(`/view_profile/${user?.username}`)}>
                                 <div className={styles.cardHeader}>
                                     {user?.profilePicture ? (
                                         <img src={getImageUrl(user.profilePicture) || DEFAULT_AVATAR} alt={user?.name} className={styles.avatar} onError={(e) => { e.target.src = DEFAULT_AVATAR }} />
@@ -66,15 +66,15 @@ export default function MyConnections() {
                                         </div>
                                     )}
                                 </div>
-                                
+
                                 <div className={styles.cardContent}>
-                                    <h3 className={styles.name}>{user?.name}</h3>
-                                    <p className={styles.headline}>@{user?.username}</p>
+                                    <h3 className={styles.name}>{user?.name || 'User'}</h3>
+                                    <p className={styles.headline}>@{user?.username || 'username'}</p>
                                 </div>
 
-                                <div className={styles.cardActions} onClick={(e)=>e.stopPropagation()}>
-                                    <button className={styles.rejectBtn} onClick={()=>handleIgnore(user._id)}>Reject</button>
-                                    <button className={styles.acceptBtn} onClick={()=>handleAccept(user._id)}>Accept</button>
+                                <div className={styles.cardActions} onClick={(e) => e.stopPropagation()}>
+                                    <button className={styles.rejectBtn} onClick={() => handleIgnore(user?._id)}>Reject</button>
+                                    <button className={styles.acceptBtn} onClick={() => handleAccept(user?._id)}>Accept</button>
                                 </div>
                             </div>
                         )
@@ -86,18 +86,18 @@ export default function MyConnections() {
                 )}
             </div>
 
-            <div className={styles.header} style={{marginTop: '3rem'}}>
+            <div className={styles.header} style={{ marginTop: '3rem' }}>
                 <h2 className={styles.title}>My Connections</h2>
                 <p className={styles.subtitle}>People you are connected with</p>
             </div>
-            
+
             <div className={styles.grid}>
                 {authState.connections && authState.connections.length > 0 ? (
-                    authState.connections.filter((conn) => conn.status_accepted === true).map((connection)=>{
+                    authState.connections.filter((conn) => conn.status_accepted === true).map((connection) => {
                         const user = connection.connectionId;
                         if (!user) return null;
-                        return(
-                            <div key={connection._id} className={styles.card} style={{cursor:"pointer"}} onClick={()=>router.push(`/view_profile/${user.username}`)}>
+                        return (
+                            <div key={connection._id} className={styles.card} style={{ cursor: "pointer" }} onClick={() => router.push(`/view_profile/${user?.username}`)}>
                                 <div className={styles.cardHeader}>
                                     {user?.profilePicture ? (
                                         <img src={getImageUrl(user.profilePicture) || DEFAULT_AVATAR} alt={user?.name} className={styles.avatar} onError={(e) => { e.target.src = DEFAULT_AVATAR }} />
@@ -107,10 +107,10 @@ export default function MyConnections() {
                                         </div>
                                     )}
                                 </div>
-                                
+
                                 <div className={styles.cardContent}>
-                                    <h3 className={styles.name}>{user?.name}</h3>
-                                    <p className={styles.headline}>@{user?.username}</p>
+                                    <h3 className={styles.name}>{user?.name || 'User'}</h3>
+                                    <p className={styles.headline}>@{user?.username || 'username'}</p>
                                 </div>
                             </div>
                         )
