@@ -4,6 +4,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import fs from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 import postsRoutes from "./routes/posts.routes.js";
@@ -12,9 +16,9 @@ import userRoutes from "./routes/user.routes.js";
 
 dotenv.config();
 
-const uploadsDir = path.join(process.cwd(), "uploads");
+const uploadsDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(uploadsDir)) {
-   fs.mkdirSync(uploadsDir);
+   fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
 const app = express();
@@ -24,7 +28,7 @@ app.use(express.json());
 app.use(postsRoutes);
 app.use(userRoutes);
 
-app.use(express.static("uploads"));
+app.use(express.static(path.join(__dirname, "uploads")));
 
 
 

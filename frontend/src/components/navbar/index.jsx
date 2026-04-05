@@ -56,6 +56,7 @@ export default function NavbarComponent() {
                                         src={`${BASE_URL}/${user?.userId?.profilePicture || "default.jpg"}`} 
                                         alt="Me" 
                                         className={styles.profileImage}
+                                        onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
                                     />
                                     <div className={styles.userInfo}>
                                         <span className={styles.userName}>Me</span>

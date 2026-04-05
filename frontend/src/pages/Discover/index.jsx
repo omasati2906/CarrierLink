@@ -88,15 +88,13 @@ export default function Discover() {
                         src={`${BASE_URL}/${user.userId.profilePicture}`}
                         alt={user.userId?.name}
                         className={styles.avatar}
-                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                        onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
                       />
-                    ) : null}
-                    <div
-                      className={styles.avatarFallback}
-                      style={{ display: user.userId?.profilePicture ? 'none' : 'flex' }}
-                    >
-                      {(user.userId?.name || 'U').charAt(0).toUpperCase()}
-                    </div>
+                    ) : (
+                        <div className={styles.avatarFallback}>
+                            {(user.userId?.name || 'U').charAt(0).toUpperCase()}
+                        </div>
+                    )}
                   </div>
 
                   {/* Card Body */}

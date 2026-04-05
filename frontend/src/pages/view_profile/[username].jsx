@@ -135,15 +135,13 @@ export default function ViewProfile({ userProfile }) {
                 src={`${BASE_URL}/${profileUser.profilePicture}`}
                 alt={profileUser?.name}
                 className={styles.avatar}
-                onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
               />
-            ) : null}
-            <div 
-               className={styles.avatarFallback}
-               style={{ display: profileUser?.profilePicture ? 'none' : 'flex' }}
-            >
-              {(profileUser?.name || 'U').charAt(0).toUpperCase()}
-            </div>
+            ) : (
+                <div className={styles.avatarFallback}>
+                    {(profileUser?.name || 'U').charAt(0).toUpperCase()}
+                </div>
+            )}
           </div>
 
           {/* User Info (Name, Headline, Email, Connect Button) */}
@@ -252,6 +250,7 @@ export default function ViewProfile({ userProfile }) {
                       <img 
                         src={`${BASE_URL}/${post.media}`} 
                         alt="Post media" 
+                        onError={(e) => { e.target.style.display = 'none' }}
                         style={{ width: '100%', borderRadius: '8px', marginTop: '1rem', maxHeight: '300px', objectFit: 'cover' }}
                       />
                     )}

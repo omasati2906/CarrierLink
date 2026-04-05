@@ -2,13 +2,18 @@ import { Router } from "express";
 import { register,login,uploadProfilePicture,updateUserProfile,getUserProfile,udpdateProfileData,getAllUserProfile,downloadProfile ,acceptConnectionRequest,sendConnectionRequest,ToWhomIHaveSentConnectionRequests,WhoSentMeConnectionRequests,getUserProfileAndUserBasedOnUsername,findConnections} from "../controllers/user.controller.js";
 
 import multer from "multer";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = Router();
 
 
 const storage = multer.diskStorage({
    destination: function (req, file, cb) {
-      cb(null, "uploads/");
+      cb(null, path.join(__dirname, "../uploads/"));
    },
    filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
