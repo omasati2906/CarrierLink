@@ -14,9 +14,23 @@ export default function index() {
     const router=useRouter();
 
     useEffect(() => {
-        dispatch(getwhoSentmeconnectionRequest({ token: localStorage.getItem("token") }));
-        dispatch(getmyconnectionRequest({ token: localStorage.getItem("token") }));
-    }, [dispatch]);
+        const token = localStorage.getItem("token");
+        if (!token || authState.isError) {
+            router.push("/login");
+            return;
+        }
+        dispatch(getwhoSentmeconnectionRequest({ token }));
+        dispatch(getmyconnectionRequest({ token }));
+        dispatch(getAboutUser({ token }));
+    }, [dispatch, authState.isError, router]);
+
+    if (!authState || (!authState.user && !authState.isError)) {
+        return (
+            <div className={styles.emptyState}>
+                <p>Loading connections...</p>
+            </div>
+        );
+    }
 
     const handleAccept = async (userId) => {
         await dispatch(acceptConnectionsRequest({ token: localStorage.getItem("token"), userId ,action:"accept"}));

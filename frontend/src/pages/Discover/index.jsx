@@ -15,9 +15,23 @@ export default function Discover() {
   const router=useRouter();
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token || authState.isError) {
+      router.push('/login');
+      return;
+    }
     dispatch(getAllUsers());
-     dispatch(getAboutUser({ token: localStorage.getItem('token') }));
-  }, []);
+    dispatch(getAboutUser({ token }));
+  }, [dispatch, authState.isError, router]);
+
+  if (!authState.user && !authState.isError) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+        <span>Loading Discover...</span>
+      </div>
+    );
+  }
 
   const filteredUsers = authState.allUsers?.filter((user) => {
     // Exclude the current user from the list

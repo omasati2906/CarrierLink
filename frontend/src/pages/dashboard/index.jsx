@@ -39,11 +39,14 @@ export default function Dashboard() {
     //all this are client side rendering
 
     const dispatch = useDispatch();
-    const { user, allUsers, all_profiles_fetched, connections_of_user } = useSelector((state) => state.auth);
+    const { user, allUsers, all_profiles_fetched, connections_of_user, isError } = useSelector((state) => state.auth);
     const { posts, postId, comments } = useSelector((state) => state.posts);
 
     useEffect(() => {
-        if (!localStorage.getItem("token")) {
+        if (!localStorage.getItem("token") || isError) {
+            if (isError) {
+                dispatch(reset());
+            }
             router.push("/login");
         } else {
             setistokenthere(true);
@@ -58,7 +61,7 @@ export default function Dashboard() {
 
 
         }
-    }, [dispatch, router])
+    }, [dispatch, router, isError])
 
     const [postContent, setpostcontent] = useState("");
     const [postMedia, setpostmedia] = useState(null);
@@ -85,7 +88,7 @@ export default function Dashboard() {
         dispatch(getAllPosts());
     }
 
-    if (!user && !istokenthere) {
+    if (!user) {
         return (
             <div className={styles.loadingContainer}>
                 <h3>Loading your professional space...</h3>

@@ -32,10 +32,27 @@ export default function Profile() {
 
   // ── fetch profile & posts ──
   useEffect(() => {
-    dispatch(getAboutUser({ token: localStorage.getItem('token') }));
+    const token = localStorage.getItem('token');
+    if (!token || authState.isError) {
+      if (authState.isError) {
+        dispatch({ type: 'auth/reset' });
+      }
+      router.push('/login');
+      return;
+    }
+    dispatch(getAboutUser({ token }));
     dispatch(getAllPosts());
-    dispatch(connectionsOfUser({ token: localStorage.getItem("token") }));
-  }, [dispatch]);
+    dispatch(connectionsOfUser({ token }));
+  }, [dispatch, authState.isError, router]);
+
+  if (!authState.user && !authState.isError) {
+    return (
+      <div className={styles.loadingContainer}>
+        <div className={styles.spinner}></div>
+        <span>Loading profile...</span>
+      </div>
+    );
+  }
 
   useEffect(() => {
     if (authState.user) {
