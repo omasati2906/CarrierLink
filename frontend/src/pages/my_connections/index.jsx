@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 import { getImageUrl, DEFAULT_AVATAR } from '@/config';
 import { useRouter } from 'next/router';
 
-export default function index() {
+export default function MyConnections() {
 
     const dispatch=useDispatch();
     const authState=useSelector(state=>state.auth);

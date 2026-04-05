@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers,getAboutUser } from '@/config/redux/action/authAction'
 import { getImageUrl, DEFAULT_AVATAR } from '@/config'
 import styles from './styles.module.css'
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 export default function Discover() {
 
