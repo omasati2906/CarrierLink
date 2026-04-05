@@ -1,0 +1,29 @@
+# ── GLOBAL IGNORES ──
+node_modules/
+.DS_Store
+*.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ── BACKEND ──
+backend/node_modules/
+backend/.env
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# ── FRONTEND ──
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/.env
+frontend/.env.local
+frontend/*.tsbuildinfo
+frontend/next-env.d.ts
+
+# ── TMP ──
+tmp/
+.gemini/

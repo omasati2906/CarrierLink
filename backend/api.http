@@ -1,0 +1,116 @@
+POST http://localhost:9090/register
+Content-Type: application/json
+
+{
+    "name":"buland",
+    "username":"buland",
+    "email":"buland@gmail.com",
+    "password":"buland"
+}
+
+###
+
+POST http://localhost:9090/login
+Content-Type: application/json
+
+{
+    "email":"demo1@gmail.com",
+    "password":"demo1"
+}
+
+###
+GET http://localhost:9090/get_user_and_profile?token=01f5ff26b6865a2f3ed1802df1d541a0c0460d4706b1202349aaf2ea3a105b4d
+Content-Type: application/json
+
+
+###
+POST http://localhost:9090/update_profile_data
+Content-Type: application/json
+
+{
+    "token":"7a10ccac16a67e91d6bb2e3270f21b64857eacead60b63120870052dfc1297da",
+    "bio":"I am a software engineer",
+    "currentPost":"Software engineer at Google",
+    "pastWork":[
+        {
+            "company":"Google",
+            "position":"Software engineer",
+            "years":"2022-2023"
+        }
+    ],
+    "education":[
+        {
+            "school":"Stanford University",
+            "degree":"Bachelor of Science",
+            "fieldOfStudy":"Computer Science"
+        }
+    ]
+}
+
+###
+GET http://localhost:9090/get_all_user_profile
+Content-Type: application/json
+
+
+###
+POST http://localhost:9090/user/send_connection_request
+Content-Type: application/json
+
+{
+    "token":"f9e3baea51d2f8865a89e11d492d66fc3fea67374dfb7004edd9af49e08789b6",
+    "connectionId":"69b803c0af985623d9a7a75a"
+}
+
+###
+POST http://localhost:9090/user/accept_connection_request
+Content-Type: application/json
+
+{
+    "token":"2de0d172c2dc9468ed8242baebbc246fac845fb2c8a567a0669decfe4ce127f1",
+    "requestId":"2de0d172c2dc9468ed8242baebbc246fac845fb2c8a567a0669decfe4ce127f1",
+    "action_type":"accept"
+}
+
+###
+GET http://localhost:9090/user/get_my_connection_requests
+Content-Type: application/json
+token: a804953c1b70c5602f5c7fb6ebd139064d09e54a9b05dbbcb7609489b83bdb98
+
+###
+GET http://localhost:9090/user/get_who_sent_me_connection_requests
+Content-Type: application/json
+{
+    "token": "a804953c1b70c5602f5c7fb6ebd139064d09e54a9b05dbbcb7609489b83bdb98" 
+}
+
+###
+GET http://localhost:9090/get_all_posts
+Content-Type: application/json
+
+###
+POST http://localhost:9090/delete_post
+Content-Type: application/json
+
+{
+    "token":"2de0d172c2dc9468ed8242baebbc246fac845fb2c8a567a0669decfe4ce127f1",
+    "postId":"69baa846844d0e7c020ed5fe"
+}
+
+###
+GET http://localhost:9090/user/find_connections
+Content-Type: application/json
+{
+    "token": "2de0d172c2dc9468ed8242baebbc246fac845fb2c8a567a0669decfe4ce127f1" 
+}
+
+###
+GET http://localhost:9090/find_connections?token=01f5ff26b6865a2f3ed1802df1d541a0c0460d4706b1202349aaf2ea3a105b4d
+Content-Type: application/json
+
+###
+POST http://localhost:9090/all_users_who_liked_post
+Content-Type: application/json
+
+{
+    "post_id":"69c50a09f1861fc8cd30866f"
+}
