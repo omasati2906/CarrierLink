@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getwhoSentmeconnectionRequest, getmyconnectionRequest, acceptConnectionsRequest } from '@/config/redux/action/authAction';
 import { useEffect } from 'react';
 import styles from "./styles.module.css";
-import { BASE_URL } from '@/config';
+import { getImageUrl, DEFAULT_AVATAR } from '@/config';
 import { useRouter } from 'next/router';
 
 export default function index() {
@@ -45,7 +45,7 @@ export default function index() {
                             <div key={connectionRequest._id} className={styles.card} onClick={()=>router.push(`/view_profile/${user.username}`)}>
                                 <div className={styles.cardHeader}>
                                     {user?.profilePicture ? (
-                                        <img src={`${BASE_URL}/${user.profilePicture}`} alt={user?.name} className={styles.avatar} />
+                                        <img src={getImageUrl(user.profilePicture) || DEFAULT_AVATAR} alt={user?.name} className={styles.avatar} onError={(e) => { e.target.src = DEFAULT_AVATAR }} />
                                     ) : (
                                         <div className={styles.avatarFallback}>
                                             {(user?.name || "U").charAt(0).toUpperCase()}
@@ -86,7 +86,7 @@ export default function index() {
                             <div key={connection._id} className={styles.card} style={{cursor:"pointer"}} onClick={()=>router.push(`/view_profile/${user.username}`)}>
                                 <div className={styles.cardHeader}>
                                     {user?.profilePicture ? (
-                                        <img src={`${BASE_URL}/${user.profilePicture}`} alt={user?.name} className={styles.avatar} />
+                                        <img src={getImageUrl(user.profilePicture) || DEFAULT_AVATAR} alt={user?.name} className={styles.avatar} onError={(e) => { e.target.src = DEFAULT_AVATAR }} />
                                     ) : (
                                         <div className={styles.avatarFallback}>
                                             {(user?.name || "U").charAt(0).toUpperCase()}

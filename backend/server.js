@@ -25,11 +25,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 app.use(postsRoutes);
 app.use(userRoutes);
-
-app.use(express.static(path.join(__dirname, "uploads")));
-
 
 
 

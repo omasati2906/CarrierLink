@@ -1,6 +1,6 @@
 import React from 'react';
 import UserLayout from '@/layout/UserLayout';
-import { BASE_URL } from '@/config';
+import { getImageUrl, DEFAULT_AVATAR } from '@/config';
 import clientServer from '@/config';
 import styles from './styles.module.css'; 
 import { useRouter } from 'next/router';
@@ -132,10 +132,10 @@ export default function ViewProfile({ userProfile }) {
           <div className={styles.avatarSection}>
             {profileUser?.profilePicture ? (
               <img
-                src={`${BASE_URL}/${profileUser.profilePicture}`}
+                src={getImageUrl(profileUser.profilePicture) || DEFAULT_AVATAR}
                 alt={profileUser?.name}
                 className={styles.avatar}
-                onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
+                onError={(e) => { e.target.src = DEFAULT_AVATAR }}
               />
             ) : (
                 <div className={styles.avatarFallback}>
@@ -248,7 +248,7 @@ export default function ViewProfile({ userProfile }) {
                     </p>
                     {post.media && (
                       <img 
-                        src={`${BASE_URL}/${post.media}`} 
+                        src={getImageUrl(post.media)}
                         alt="Post media" 
                         onError={(e) => { e.target.style.display = 'none' }}
                         style={{ width: '100%', borderRadius: '8px', marginTop: '1rem', maxHeight: '300px', objectFit: 'cover' }}

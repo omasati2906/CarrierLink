@@ -6,7 +6,7 @@ import { getAllPosts, createPost, deletePost, likePost, getAllComments, commentP
 import { getAboutUser } from '@/config/redux/action/authAction'
 import { getAllUsers, connectionsOfUser } from '@/config/redux/action/authAction'
 import styles from './styles.module.css'
-import { BASE_URL } from '@/config'
+import { getImageUrl, DEFAULT_AVATAR } from '@/config'
 import { resetpostId } from '@/config/redux/reducer/postReducer'
 
 
@@ -129,10 +129,10 @@ export default function Dashboard() {
                     <div className={styles.profileCard}>
                         <div className={styles.coverImage}></div>
                         <img
-                            src={`${BASE_URL}/${user?.userId?.profilePicture || "default.jpg"}`}
+                            src={getImageUrl(user?.userId?.profilePicture) || DEFAULT_AVATAR}
                             alt="Profile"
                             className={styles.sidebarAvatar}
-                            onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
+                            onError={(e) => { e.target.src = DEFAULT_AVATAR }}
                         />
                         <div className={styles.profileInfo}>
                             <h3 className={styles.profileName}>{user?.userId?.name || 'User'}</h3>
@@ -154,10 +154,10 @@ export default function Dashboard() {
                     <div className={styles.createPostCard}>
                         <div className={styles.createPostTop}>
                             <img
-                                src={`${BASE_URL}/${user?.userId?.profilePicture || "default.jpg"}`}
+                                src={getImageUrl(user?.userId?.profilePicture) || DEFAULT_AVATAR}
                                 className={styles.userAvatarMini}
                                 alt="User"
-                                onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
+                                onError={(e) => { e.target.src = DEFAULT_AVATAR }}
                             />
                             <div style={{ flex: 1, position: 'relative', display: 'flex', alignItems: 'center' }}>
                                 <textarea
@@ -201,10 +201,10 @@ export default function Dashboard() {
                                     <div className={styles.postCard}>
                                         <div className={styles.postHeader} style={{ cursor: "pointer" }} onClick={() => handleredirectuser(post.userId?.username)}>
                                             <img
-                                                src={`${BASE_URL}/${post.userId?.profilePicture || "default.jpg"}`}
+                                                src={getImageUrl(post.userId?.profilePicture) || DEFAULT_AVATAR}
                                                 className={styles.postAvatar}
                                                 alt="User"
-                                                onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
+                                                onError={(e) => { e.target.src = DEFAULT_AVATAR }}
                                             />
                                             <div className={styles.postAuthorInfo}>
                                                 <h4>{post.userId?.name || "Unknown User"}</h4>
@@ -227,9 +227,9 @@ export default function Dashboard() {
                                         {post.media && (
                                             <div className={styles.postMediaContainer}>
                                                 {post.filetype === "image" ? (
-                                                    <img src={`${BASE_URL}/${post.media}`} className={styles.postMedia} alt="Post content" onError={(e) => { e.target.style.display = 'none' }} />
+                                                    <img src={getImageUrl(post.media)} className={styles.postMedia} alt="Post content" onError={(e) => { e.target.style.display = 'none' }} />
                                                 ) : (
-                                                    <video src={`${BASE_URL}/${post.media}`} className={styles.postMedia} controls />
+                                                    <video src={getImageUrl(post.media) || post.media} className={styles.postMedia} controls />
                                                 )}
                                             </div>
                                         )}
@@ -273,10 +273,10 @@ export default function Dashboard() {
                                     .map((profile) => (
                                         <div key={profile._id} className={styles.profileItemSmall} onClick={() => router.push(`/view_profile/${profile.userId?.username}`)}>
                                             <img
-                                                src={`${BASE_URL}/${profile.userId?.profilePicture || "default.jpg"}`}
+                                                src={getImageUrl(profile.userId?.profilePicture) || DEFAULT_AVATAR}
                                                 className={styles.profileImageSmall}
                                                 alt={profile.userId?.name}
-                                                onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
+                                                onError={(e) => { e.target.src = DEFAULT_AVATAR }}
                                             />
                                             <div className={styles.profileDetailsSmall}>
                                                 <div className={styles.profileNameSmall}>{profile.userId?.name}</div>

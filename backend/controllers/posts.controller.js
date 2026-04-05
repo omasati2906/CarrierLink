@@ -26,9 +26,9 @@ export const createPost = async (req,res) => {
 
          body:req.body.body,             //we could have done ...req.body but as media is optional so we are handling it seperately
 
-        media:req.file !=undefined ? req.file.filename : "",
+         media: req.file != undefined ? req.file.path : "",          // Cloudinary full URL
 
-        filetype:req.file !=undefined ? req.file.mimetype.split("/")[0] : ""  //image or video 
+        filetype: req.file != undefined ? req.file.mimetype.split("/")[0] : ""  //image or video 
       });
 
       await post.save();

@@ -2,7 +2,7 @@ import UserLayout from '@/layout/UserLayout'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllUsers,getAboutUser } from '@/config/redux/action/authAction'
-import { BASE_URL } from '@/config'
+import { getImageUrl, DEFAULT_AVATAR } from '@/config'
 import styles from './styles.module.css'
 import { useRouter } from 'next/navigation';
 
@@ -85,10 +85,10 @@ export default function Discover() {
                   <div className={styles.avatarWrapper}>
                     {user.userId?.profilePicture ? (
                       <img
-                        src={`${BASE_URL}/${user.userId.profilePicture}`}
+                        src={getImageUrl(user.userId.profilePicture) || DEFAULT_AVATAR}
                         alt={user.userId?.name}
                         className={styles.avatar}
-                        onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
+                        onError={(e) => { e.target.src = DEFAULT_AVATAR }}
                       />
                     ) : (
                         <div className={styles.avatarFallback}>

@@ -167,7 +167,7 @@ export const uploadProfilePicture = async (req, res) => {
          return res.status(404).json({ message: "User not found" })
       }
 
-      user.profilePicture = req.file.filename;
+      user.profilePicture = req.file.path;   // Cloudinary returns full URL in req.file.path
       await user.save();
       return res.status(200).json({ message: "Profile picture updated successfully" })
 

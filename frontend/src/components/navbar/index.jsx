@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { reset } from "@/config/redux/reducer/authReducer";
-import { BASE_URL } from "@/config";
+import { getImageUrl, DEFAULT_AVATAR } from "@/config";
 
 export default function NavbarComponent() {
     const router = useRouter();
@@ -53,10 +53,10 @@ export default function NavbarComponent() {
                             <div className={styles.profileSection}>
                                 <div className={styles.profileWrapper} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                                     <img 
-                                        src={`${BASE_URL}/${user?.userId?.profilePicture || "default.jpg"}`} 
+                                        src={getImageUrl(user?.userId?.profilePicture) || DEFAULT_AVATAR} 
                                         alt="Me" 
                                         className={styles.profileImage}
-                                        onError={(e) => { e.target.src = `${BASE_URL}/default.jpg` }}
+                                        onError={(e) => { e.target.src = DEFAULT_AVATAR }}
                                     />
                                     <div className={styles.userInfo}>
                                         <span className={styles.userName}>Me</span>

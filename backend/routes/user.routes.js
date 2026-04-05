@@ -2,26 +2,21 @@ import { Router } from "express";
 import { register,login,uploadProfilePicture,updateUserProfile,getUserProfile,udpdateProfileData,getAllUserProfile,downloadProfile ,acceptConnectionRequest,sendConnectionRequest,ToWhomIHaveSentConnectionRequests,WhoSentMeConnectionRequests,getUserProfileAndUserBasedOnUsername,findConnections} from "../controllers/user.controller.js";
 
 import multer from "multer";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 
 const router = Router();
 
-
-const storage = multer.diskStorage({
-   destination: function (req, file, cb) {
-      cb(null, path.join(__dirname, "../uploads/"));
-   },
-   filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      cb(null, uniqueSuffix + '-' + file.originalname);
+const storage = new CloudinaryStorage({
+   cloudinary: cloudinary,
+   params: {
+      folder: "careerlink/profiles",
+      allowed_formats: ["jpg", "jpeg", "png", "webp"],
+      transformation: [{ width: 400, height: 400, crop: "fill", gravity: "face" }],
    },
 });
 
-const upload=multer({storage:storage})
+const upload = multer({ storage });
 
 
 router.route("/update_profile_picture").post(upload.single("profile_Picture"),uploadProfilePicture);

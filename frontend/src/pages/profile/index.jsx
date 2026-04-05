@@ -4,7 +4,7 @@ import UserLayout from '@/layout/UserLayout';
 import React, { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles.module.css';
-import { BASE_URL } from '@/config';
+import { getImageUrl, DEFAULT_AVATAR } from '@/config';
 import clientServer from '@/config';
 import { useRouter } from 'next/router';
 
@@ -247,7 +247,7 @@ export default function Profile() {
             <div className={styles.avatarWrapper}>
               {profileUser?.profilePicture && profileUser.profilePicture !== 'default.jpg' ? (
                 <img
-                  src={`${BASE_URL}/${profileUser.profilePicture}`}
+                  src={getImageUrl(profileUser.profilePicture) || DEFAULT_AVATAR}
                   alt={profileUser?.name}
                   className={styles.avatar}
                   onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
@@ -425,7 +425,7 @@ export default function Profile() {
                     </p>
                     <p className={styles.postBody}>{post.body}</p>
                     {post.media && (
-                      <img src={`${BASE_URL}/${post.media}`} alt="Post media" className={styles.postMedia} />
+                      <img src={getImageUrl(post.media)} alt="Post media" className={styles.postMedia} onError={(e) => { e.target.style.display = 'none' }} />
                     )}
                   </div>
                 ))
